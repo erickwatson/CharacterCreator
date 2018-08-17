@@ -11,6 +11,11 @@ namespace CharacterCreator
     {
         private Image image = null;
 
+        public Image Image
+        {
+            get; private set;
+        }
+
         private string path;
         public int Width
         {
@@ -30,8 +35,10 @@ namespace CharacterCreator
 
         public Spritesheet(string path)
         {
-            this.path = path;
-            Load();
+            //this.path = path;
+            //Load();
+
+            Image = Image.FromFile(path);
         }
 
         public void Load()
