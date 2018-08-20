@@ -112,5 +112,10 @@ namespace CharacterCreator
             childForm.Show();
 
         }
+
+        private void saveToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+
+        }
     }
 }
