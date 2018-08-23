@@ -16,7 +16,7 @@ namespace CharacterCreator
         {
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            Application.Run(new MDIForm());
+            Application.Run(new MDIParent1());
         }
     }
 }
