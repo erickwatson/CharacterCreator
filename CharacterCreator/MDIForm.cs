@@ -11,8 +11,10 @@ using System.Windows.Forms;
 
 namespace CharacterCreator
 {
+
     public partial class MDIForm : Form
     {
+        
         public MDIForm()
         {
             InitializeComponent();
