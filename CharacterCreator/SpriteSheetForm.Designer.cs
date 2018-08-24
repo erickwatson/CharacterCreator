@@ -48,6 +48,7 @@
             this.pictureBox1.Size = new System.Drawing.Size(969, 320);
             this.pictureBox1.TabIndex = 0;
             this.pictureBox1.TabStop = false;
+            this.pictureBox1.Click += new System.EventHandler(this.pictureBox1_Click);
             // 
             // buttonLoad
             // 
@@ -65,6 +66,7 @@
             this.textBoxWidth.Name = "textBoxWidth";
             this.textBoxWidth.Size = new System.Drawing.Size(100, 20);
             this.textBoxWidth.TabIndex = 2;
+            this.textBoxWidth.TextChanged += new System.EventHandler(this.textBoxWidth_TextChanged);
             // 
             // label1
             // 
@@ -90,6 +92,7 @@
             this.textBoxHeight.Name = "textBoxHeight";
             this.textBoxHeight.Size = new System.Drawing.Size(100, 20);
             this.textBoxHeight.TabIndex = 4;
+            this.textBoxHeight.TextChanged += new System.EventHandler(this.textBoxHeight_TextChanged);
             // 
             // label3
             // 
@@ -106,6 +109,7 @@
             this.textBoxSpacing.Name = "textBoxSpacing";
             this.textBoxSpacing.Size = new System.Drawing.Size(100, 20);
             this.textBoxSpacing.TabIndex = 6;
+            this.textBoxSpacing.TextChanged += new System.EventHandler(this.textBoxSpacing_TextChanged);
             // 
             // SpriteSheetForm
             // 

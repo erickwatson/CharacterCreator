@@ -64,6 +64,7 @@
             this.comboBoxSheets.Name = "comboBoxSheets";
             this.comboBoxSheets.Size = new System.Drawing.Size(263, 21);
             this.comboBoxSheets.TabIndex = 2;
+            this.comboBoxSheets.SelectedIndexChanged += new System.EventHandler(this.comboBoxSheets_SelectedValueChanged);
             // 
             // listBoxTiles
             // 
@@ -72,6 +73,7 @@
             this.listBoxTiles.Name = "listBoxTiles";
             this.listBoxTiles.Size = new System.Drawing.Size(263, 199);
             this.listBoxTiles.TabIndex = 3;
+            this.listBoxTiles.SelectedIndexChanged += new System.EventHandler(this.listBoxTiles_SelectedIndexChanged);
             // 
             // buttonDelete
             // 
@@ -81,6 +83,7 @@
             this.buttonDelete.TabIndex = 4;
             this.buttonDelete.Text = "Delete";
             this.buttonDelete.UseVisualStyleBackColor = true;
+            this.buttonDelete.Click += new System.EventHandler(this.buttonDelete_Click);
             // 
             // buttonAdd
             // 
@@ -90,6 +93,7 @@
             this.buttonAdd.TabIndex = 5;
             this.buttonAdd.Text = "Add";
             this.buttonAdd.UseVisualStyleBackColor = true;
+            this.buttonAdd.Click += new System.EventHandler(this.buttonAdd_Click);
             // 
             // labelName
             // 
@@ -134,6 +138,7 @@
             this.Controls.Add(this.pictureBox);
             this.Name = "SpriteForm";
             this.Text = "Sprite";
+            this.Activated += new System.EventHandler(this.SpriteForm_Activated);
             this.Load += new System.EventHandler(this.SpriteForm_Load);
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox)).EndInit();
             this.ResumeLayout(false);

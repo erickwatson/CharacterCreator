@@ -23,9 +23,7 @@ namespace CharacterCreator
                   Spritesheet.Filename : string.Empty; }
         }
 
-        int gridWidth = 16;
-        int gridHeight = 16;
-        int spacing = 0;
+       
         public SpriteSheetForm()
         {
             InitializeComponent();
@@ -56,7 +54,7 @@ namespace CharacterCreator
 
             g.Clear(Color.White);
 
-            if (Spritesheet != null)
+            if (Spritesheet == null)
                 return;
             //{
             //    g.DrawImage(spritesheet.Image, 0, 0);
@@ -93,7 +91,7 @@ namespace CharacterCreator
         private void textBoxHeight_TextChanged(object sender, EventArgs e)
         {
             int height;
-            if(int.TryParse(textBoxHeight.Text, out height) == true)
+            if (int.TryParse(textBoxHeight.Text, out height) == true)
             {
                 Spritesheet.GridHeight = height;
                 drawGrid();
@@ -101,6 +99,7 @@ namespace CharacterCreator
 
             textBoxHeight.Text = Spritesheet.GridHeight.ToString();
         }
+
 
         private void textBoxWidth_TextChanged(object sender, EventArgs e)
         {
@@ -114,17 +113,6 @@ namespace CharacterCreator
             textBoxWidth.Text = Spritesheet.GridWidth.ToString();
         }
 
-        private void textBoxSpacing_TextChanged(object sender, EventArgs e)
-        {
-            int spacing;
-            if (int.TryParse(textBoxSpacing.Text, out spacing) == true)
-            {
-                Spritesheet.Spacing = spacing;
-                drawGrid();
-            }
-
-            textBoxSpacing.Text = Spritesheet.Spacing.ToString();
-        }
 
         private void SpriteSheetForm_Shown(object sender, EventArgs e)
         {
@@ -142,9 +130,21 @@ namespace CharacterCreator
                 MouseEventArgs mouse = e as MouseEventArgs;
                 CurrentTile = new Point(
                     mouse.X / (Spritesheet.GridWidth + Spritesheet.Spacing),
-                    mouse.Y / Spritesheet.GridHeight + Spritesheet.Spacing));
+                    mouse.Y / (Spritesheet.GridHeight + Spritesheet.Spacing));
                 drawGrid();
             }
+        }
+
+        private void textBoxSpacing_TextChanged(object sender, EventArgs e)
+        {
+            int spacing;
+            if (int.TryParse(textBoxSpacing.Text, out spacing) == true)
+            {
+                Spritesheet.Spacing = spacing;
+                drawGrid();
+            }
+
+            textBoxSpacing.Text = Spritesheet.Spacing.ToString();
         }
     }
 }
