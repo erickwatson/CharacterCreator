@@ -31,12 +31,16 @@
             this.pictureBox = new System.Windows.Forms.PictureBox();
             this.textBox1 = new System.Windows.Forms.TextBox();
             this.comboBoxSheets = new System.Windows.Forms.ComboBox();
-            this.listBoxTiles = new System.Windows.Forms.ListBox();
             this.buttonDelete = new System.Windows.Forms.Button();
             this.buttonAdd = new System.Windows.Forms.Button();
             this.labelName = new System.Windows.Forms.Label();
             this.labelSheet = new System.Windows.Forms.Label();
             this.labelLayers = new System.Windows.Forms.Label();
+            this.listViewTiles = new System.Windows.Forms.ListView();
+            this.name = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.priority = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.tilex = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.tiley = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox)).BeginInit();
             this.SuspendLayout();
             // 
@@ -65,15 +69,6 @@
             this.comboBoxSheets.Size = new System.Drawing.Size(263, 21);
             this.comboBoxSheets.TabIndex = 2;
             this.comboBoxSheets.SelectedIndexChanged += new System.EventHandler(this.comboBoxSheets_SelectedValueChanged);
-            // 
-            // listBoxTiles
-            // 
-            this.listBoxTiles.FormattingEnabled = true;
-            this.listBoxTiles.Location = new System.Drawing.Point(362, 67);
-            this.listBoxTiles.Name = "listBoxTiles";
-            this.listBoxTiles.Size = new System.Drawing.Size(263, 199);
-            this.listBoxTiles.TabIndex = 3;
-            this.listBoxTiles.SelectedIndexChanged += new System.EventHandler(this.listBoxTiles_SelectedIndexChanged);
             // 
             // buttonDelete
             // 
@@ -122,17 +117,53 @@
             this.labelLayers.TabIndex = 8;
             this.labelLayers.Text = "Layers";
             // 
+            // listViewTiles
+            // 
+            this.listViewTiles.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
+            this.name,
+            this.priority,
+            this.tilex,
+            this.tiley});
+            this.listViewTiles.LabelEdit = true;
+            this.listViewTiles.Location = new System.Drawing.Point(362, 66);
+            this.listViewTiles.MultiSelect = false;
+            this.listViewTiles.Name = "listViewTiles";
+            this.listViewTiles.Size = new System.Drawing.Size(263, 206);
+            this.listViewTiles.TabIndex = 9;
+            this.listViewTiles.UseCompatibleStateImageBehavior = false;
+            this.listViewTiles.View = System.Windows.Forms.View.Details;
+            this.listViewTiles.AfterLabelEdit += new System.Windows.Forms.LabelEditEventHandler(this.listViewTiles_AfterLabelEdit);
+            this.listViewTiles.SelectedIndexChanged += new System.EventHandler(this.listView1_SelectedIndexChanged);
+            // 
+            // name
+            // 
+            this.name.Text = "Layer Name";
+            this.name.Width = 73;
+            // 
+            // priority
+            // 
+            this.priority.Text = "Priority";
+            // 
+            // tilex
+            // 
+            this.tilex.Text = "Tile X";
+            // 
+            // tiley
+            // 
+            this.tiley.Text = "Tile Y";
+            this.tiley.Width = 72;
+            // 
             // SpriteForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(642, 316);
+            this.Controls.Add(this.listViewTiles);
             this.Controls.Add(this.labelLayers);
             this.Controls.Add(this.labelSheet);
             this.Controls.Add(this.labelName);
             this.Controls.Add(this.buttonAdd);
             this.Controls.Add(this.buttonDelete);
-            this.Controls.Add(this.listBoxTiles);
             this.Controls.Add(this.comboBoxSheets);
             this.Controls.Add(this.textBox1);
             this.Controls.Add(this.pictureBox);
@@ -151,11 +182,15 @@
         private System.Windows.Forms.PictureBox pictureBox;
         private System.Windows.Forms.TextBox textBox1;
         private System.Windows.Forms.ComboBox comboBoxSheets;
-        private System.Windows.Forms.ListBox listBoxTiles;
         private System.Windows.Forms.Button buttonDelete;
         private System.Windows.Forms.Button buttonAdd;
         private System.Windows.Forms.Label labelName;
         private System.Windows.Forms.Label labelSheet;
         private System.Windows.Forms.Label labelLayers;
+        private System.Windows.Forms.ListView listViewTiles;
+        private System.Windows.Forms.ColumnHeader name;
+        private System.Windows.Forms.ColumnHeader priority;
+        private System.Windows.Forms.ColumnHeader tilex;
+        private System.Windows.Forms.ColumnHeader tiley;
     }
 }

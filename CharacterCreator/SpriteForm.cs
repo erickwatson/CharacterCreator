@@ -14,6 +14,8 @@ namespace CharacterCreator
     {
         Spritesheet spritesheet = null;
         Bitmap drawArea = null;
+
+        List<Layer> layers = new List<Layer>();
         public SpriteForm()
         {
             InitializeComponent();
@@ -77,7 +79,13 @@ namespace CharacterCreator
                 SpriteSheetForm sheet = FindSheet();
                 if(sheet != null)
                 {
-                    listBoxTiles.Items.Add(sheet.CurrentTile);
+                    Layer layer = new Layer("Unnamed Layer");
+                    layer.TileCoordinates = sheet.CurrentTile;
+                    layer.Priority = layers.Count + 1;
+
+                    layers.Add(layer);
+
+                    listViewTiles.Items.Add(layer.GetListViewItem());
 
                     DrawCharacter();
                 }
@@ -92,11 +100,11 @@ namespace CharacterCreator
             Rectangle dest = new Rectangle(0, 0,
                 spritesheet.GridWidth << 2, spritesheet.GridHeight << 2);
 
-            foreach(Point tile in listBoxTiles.Items)
+            foreach(Layer layer in layers)
             {
                 Rectangle source = new Rectangle(
-                    tile.X * (spritesheet.GridWidth + spritesheet.Spacing),
-                    tile.Y * (spritesheet.GridHeight + spritesheet.Spacing),
+                    layer.TileCoordinates.X * (spritesheet.GridWidth + spritesheet.Spacing),
+                    layer.TileCoordinates.Y * (spritesheet.GridHeight + spritesheet.Spacing),
                     spritesheet.GridWidth,
                     spritesheet.GridHeight);
 
@@ -111,7 +119,9 @@ namespace CharacterCreator
 
         private void comboBoxSheets_SelectedValueChanged(object sender, EventArgs e)
         {
-            listBoxTiles.Items.Clear();
+            listViewTiles.Items.Clear();
+            layers.Clear();
+
             spritesheet = comboBoxSheets.SelectedItem as Spritesheet;
 
             // clear the image
@@ -122,17 +132,42 @@ namespace CharacterCreator
         }
         private void buttonDelete_Click(object sender, EventArgs e)
         {
-            if (listBoxTiles.SelectedIndex >= 0 &&
-                listBoxTiles.SelectedIndex < listBoxTiles.Items.Count)
+            ListView.SelectedIndexCollection indicies =
+                listViewTiles.SelectedIndices;
+            if (indicies.Count <= 0)
+                return;
+
+            // remove the selected layers from the layers list
+            layers.RemoveAt(indicies[0]);
+
+            // delete and rebuild the list view (with updated priority values)
+            listViewTiles.Items.Clear();
+
+            // renumber layers
+            for (int i=0; i<layers.Count; i++)
             {
-                listBoxTiles.Items.RemoveAt(listBoxTiles.SelectedIndex);
-                DrawCharacter();
+                layers[i].Priority = i + 1;
+                listViewTiles.Items.Add(layers[i].GetListViewItem());
             }
+
+            DrawCharacter();
+        }
+
+        private void listViewTiles_SelectedIndexChanged(object sender, EventArgs e)
+        {
 
         }
 
-        private void listBoxTiles_SelectedIndexChanged(object sender, EventArgs e)
+        private void listView1_SelectedIndexChanged(object sender, EventArgs e)
         {
+
+        }
+
+        private void listViewTiles_AfterLabelEdit(object sender, LabelEditEventArgs e)
+        {
+            int index = e.Item;
+            layers[index].Name = e.Label;
+
 
         }
     }
