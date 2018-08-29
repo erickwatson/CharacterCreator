@@ -88,6 +88,14 @@ namespace CharacterCreator
             pictureBox1.Image = drawArea;
         }
 
+        public SpriteSheetForm(Spritesheet spritesheet)
+        {
+            InitializeComponent();
+            Spritesheet = spritesheet;
+            drawArea = new Bitmap(pictureBox1.Width, pictureBox1.Height);
+            drawGrid();
+        }
+
         private void textBoxHeight_TextChanged(object sender, EventArgs e)
         {
             int height;
@@ -146,5 +154,13 @@ namespace CharacterCreator
 
             textBoxSpacing.Text = Spritesheet.Spacing.ToString();
         }
+
+        private void SpriteSheeForm_Activated(object sender, EventArgs e)
+        {
+            textBoxWidth.Text = Spritesheet.GridWidth.ToString();
+            textBoxHeight.Text = Spritesheet.GridHeight.ToString();
+            textBoxSpacing.Text = Spritesheet.Spacing.ToString();
+        }
+
     }
 }

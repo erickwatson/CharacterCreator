@@ -19,6 +19,7 @@ namespace CharacterCreator
         }
 
         private Spritesheet spritesheet;
+
         public Spritesheet Spritesheet { get; set; } = null;
         
 
@@ -27,7 +28,8 @@ namespace CharacterCreator
         {
             get { return layers; }
         }
-
+        public Character()
+        { }
         public Character(string name, Spritesheet spritesheet)
         {
             this.name = name;
