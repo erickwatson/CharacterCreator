@@ -34,5 +34,10 @@ namespace CharacterCreator
             else
                 e.Effect = DragDropEffects.None;
         }
+
+        private void textBox1_TextChanged(object sender, EventArgs e)
+        {
+
+        }
     }
 }

@@ -19,7 +19,10 @@ namespace CharacterCreator
         Character character = new Character();
 
         public Spritesheet Spritesheet
-        {get { return character.Spritesheet; } }
+        {
+            get { return character.Spritesheet; }
+            set { character.Spritesheet = value; }
+        }
 
         public void SerializeItem(string fileName, IFormatter formatter)
         {

@@ -7,6 +7,8 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using System.Runtime.Serialization;
+using System.Runtime.Serialization.Formatters.Soap;
 
 namespace CharacterCreator
 {
@@ -35,11 +37,41 @@ namespace CharacterCreator
             if (openFileDialog.ShowDialog(this) == DialogResult.OK)
             {
                 string FileName = openFileDialog.FileName;
+                SpriteForm childForm = new SpriteForm();
+
+                // Use a BinaryFormatter or SoapFormatter
+                IFormatter formatter = new SoapFormatter();
+                childForm.DeserializeItem(FileName, formatter);
+
+                // normally we would validate that the form loaded (as in didn't throw an exception)
+                // before making it visible so we can cleanly exit on error
+
+                // Check if the spritesheet form is open containing the same spritesheet, if not then open one
+                SpriteSheetForm form = childForm.FindSheet();
+                if (form == null)
+                {
+                    Form spritesheetForm = new SpriteSheetForm(childForm.Spritesheet);
+                    spritesheetForm.MdiParent = this;
+                    spritesheetForm.Text = "Sprite Sheet" + childFormNumber++;
+                    spritesheetForm.Show();
+                }
+                else
+                {
+                    childForm.Spritesheet = form.Spritesheet;
+                }
+
+                // Finally, display thr SpriteForm
+                childForm.MdiParent = this;
+                childForm.Text = "Sprite " + childFormNumber++;
+                childForm.Show();
+            
+
             }
         }
 
         private void SaveAsToolStripMenuItem_Click(object sender, EventArgs e)
         {
+        
             SaveFileDialog saveFileDialog = new SaveFileDialog();
             saveFileDialog.InitialDirectory = Environment.GetFolderPath(Environment.SpecialFolder.Personal);
             saveFileDialog.Filter = "Text Files (*.txt)|*.txt|All Files (*.*)|*.*";
@@ -115,7 +147,20 @@ namespace CharacterCreator
 
         private void saveToolStripMenuItem_Click(object sender, EventArgs e)
         {
+            if (this.ActiveMdiChild != null)
+            {
+                SpriteForm spriteForm = this.ActiveMdiChild as SpriteForm;
+                if (spriteForm != null)
+                {
+                    //This is the name of the file holding the data
+                    // You can use any file extension you like
+                    string fileName = "dataStuff.myData";
+                    // Use a BinaryFormatter or SoapFormatter
+                    IFormatter formatter = new SoapFormatter();
 
+                    spriteForm.SerializeItem(fileName, formatter);
+                }
+            }
         }
 
         private void toolStripMenuNewSprite_Click(object sender, EventArgs e)
